@@ -27,6 +27,11 @@ Method: GET: [https://the-countries-datatbase-api.vercel.app](https://the-countr
 
 👉 [https://the-countries-datatbase-api.vercel.app/v1/month](https://the-countries-datatbase-api.vercel.app/v1/month)
 
+✅ Get date (v1/date/:DDMM)
+
+👉 [https://the-countries-datatbase-api.vercel.app/v1/date/0101](https://the-countries-datatbase-api.vercel.app/v1/date/0101)
+
+
 ✅ Get this year celebration
 
 👉 [https://the-countries-datatbase-api.vercel.app/v1/list](https://the-countries-datatbase-api.vercel.app/v1/list)
