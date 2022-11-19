@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "the-prayer-api",
+    "name": "countries-api",
     "builds": [
        { "src": "index.js", "use": "@vercel/node" }
     ],
