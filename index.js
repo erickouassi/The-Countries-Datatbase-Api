@@ -2,21 +2,19 @@
 const http = require("http");
 const AppData = require("./controller");
 
-const PORT = process.env.PORT || 5006;
+const PORT = process.env.PORT || 3002;
 
+// server 
 const server = http.createServer(async (req, res) => {
-        // / : GET 
+    // / : GET 
     if (req.url === "/" && req.method === "GET") {
         // set the status code, and content-type
            res.writeHead(200, { "Content-Type": "application/json",
            "Access-Control-Allow-Origin": "*" });
-           res.end(JSON.stringify({
-            "message": "App is active! 🚀",
-            "status": "success"
-        }));
+           res.end(JSON.stringify({ message: "App is active!" }));
        }
-    // /api/v1 : GET
-    else if (req.url === "/v1/list" && req.method === "GET") {
+    // /api/v1 : GET 
+    else if (req.url === "/v1/basic_prayers" && req.method === "GET") {
         // get the data.
         const allData = await new AppData().getAllData();
         // set the status code, and content-type
@@ -25,62 +23,55 @@ const server = http.createServer(async (req, res) => {
         // send the data
         res.end(JSON.stringify(allData));
     }
+    // /api/v1/stations_of_cross : GET
+    else if (req.url === "/v1/stations_of_cross" && req.method === "GET") {
+         // get data.
+        const stationData = await new AppData().getStationData();
+        // set the status code, and content-type
+        res.writeHead(200, { "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*" });
+        // send the data
+        res.end(JSON.stringify(stationData));
+    }
     //
-          // /api/v1/today : GET
-          else if (req.url === "/v1/today" &&
-          req.method === "GET") {
-                 // get today data.
-                const todayData = await new AppData().getTodayData();
-                // set the status code, and content-type
-                res.writeHead(200, { "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"  });
-                // send the data
-                res.end(JSON.stringify(todayData));
-            }
-            //
-// /api/v1/month : GET
-else if (req.url === "/v1/month" &&
-req.method === "GET") {
-       // get holiday data.
-      const holidayData = await new AppData().getHolidayData();
-      // set the status code, and content-type
-      res.writeHead(200, { "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*"  });
-      // send the data
-      res.end(JSON.stringify(holidayData));
-  }
-  //
- // /v1/date/:MMDDYY : GET
- else if (req.url.match(/\/v1\/date\/([0-9]+)/) &&
- req.method === "GET") {
-       try {
-           // get date 10272022 from url
-           const X = req.url.split("/")[3];
-           // get a single data
-           const singleData = await new AppData().getSingleData(X);
-           // set the status code and content-type
-           res.writeHead(200, { "Content-Type": "application/json",
-           "Access-Control-Allow-Origin": "*"  });
-           // send the data
-           res.end(JSON.stringify(singleData));
-       } catch (error) {
-           // set the status code and content-type
-           res.writeHead(404, { "Content-Type": "application/json",
-           "Access-Control-Allow-Origin": "*"  });
-           // send the error
-           res.end(JSON.stringify({ message: error }));
-       }
-   }
-// Add above
+
+    // /api/v1/saints : GET
+    else if (req.url === "/v1/saints" && req.method === "GET") {
+         // get random data.
+        const saintsData = await new AppData().getSaintsData();
+        // set the status code, and content-type
+        res.writeHead(200, { "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*" });
+        // send the data
+        res.end(JSON.stringify(saintsData));
+    }
+    //
+      // /api/v1/today : GET
+    else if (req.url === "/v1/saints_fr" && req.method === "GET") {
+         // get today data.
+        const saintsFrData = await new AppData().getSaintsFrData();
+        // set the status code, and content-type
+        res.writeHead(200, { "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*" });
+        // send the data
+        res.end(JSON.stringify(saintsFrData));
+    }
+    // add below
 
     // No route present
     else {
         res.writeHead(404, { "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"  });
-        res.end(JSON.stringify({ message: "Route not found 💣" }));
+        "Access-Control-Allow-Origin": "*" });
+        res.end(JSON.stringify({ message: "Route not found" }));
     }
 });
 
+
+
+
+
+
+// end 
 
 server.listen(PORT, () => {
     console.log(`server started on port: ${PORT}`);
