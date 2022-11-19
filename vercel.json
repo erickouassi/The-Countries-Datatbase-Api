@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "asp-nyc-api",
+    "name": "TCD-api",
     "builds": [
        { "src": "index.js", "use": "@vercel/node" }
     ],
